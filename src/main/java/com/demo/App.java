@@ -6,6 +6,7 @@ import com.demo.dao.CustomerDao;
 import com.demo.dao.OrderDao;
 import com.demo.model.Order;
 import com.demo.service.EmployeeService;
+import com.demo.service.OrderService;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -30,7 +31,7 @@ public class App {
                     customers(entityManager);
                     break;
                 case 3:
-                    order(entityManager);
+                    new OrderService(entityManager);
                     break;
                 default:
                     state = false;

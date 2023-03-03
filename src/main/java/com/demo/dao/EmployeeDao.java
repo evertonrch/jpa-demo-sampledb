@@ -21,6 +21,11 @@ public class EmployeeDao {
     public Optional<Employee> findEmployee(Short id) {
         return Optional.ofNullable(entityManager.find(Employee.class, id));
     }
+
+   /*
+   *  Instruções DML precisam estar em um contexto
+   *  de transação.
+   */
     public void updateEmployee(Employee employee, String name) {
         entityManager.getTransaction().begin();
         employee.setFirstName(name);

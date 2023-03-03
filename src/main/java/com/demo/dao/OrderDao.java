@@ -2,6 +2,7 @@ package com.demo.dao;
 
 import com.demo.model.Order;
 
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import java.util.Collection;
 import java.util.List;
@@ -27,7 +28,9 @@ public class OrderDao {
                 .collect(Collectors.groupingBy(Order::getStatus));
     }
 
-    public List<Order> getOrdersByStatus(String status) {
-        return null;
+    public List<Order> findByStatus(String status) {
+        return entityManager.createQuery("SELECT o FROM Order AS o WHERE o.status = :status", Order.class)
+                .setParameter("status", status)
+                .getResultList();
     }
 }
