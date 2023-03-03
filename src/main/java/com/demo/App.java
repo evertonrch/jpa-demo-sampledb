@@ -3,12 +3,11 @@ package com.demo;
 
 import com.demo.config.JPAConfig;
 import com.demo.dao.CustomerDao;
-import com.demo.dao.EmployeeDao;
 import com.demo.dao.OrderDao;
 import com.demo.model.Order;
+import com.demo.service.EmployeeService;
 
 import javax.persistence.EntityManager;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -25,7 +24,7 @@ public class App {
             int option = scanner.nextInt();
             switch (option) {
                 case 1:
-                    employees(entityManager);
+                    new EmployeeService(entityManager);
                     break;
                 case 2:
                     customers(entityManager);
@@ -50,7 +49,7 @@ public class App {
                 orderDao.getOrders().forEach(System.out::println);
                 break;
             case 2:
-                Map<String, List<Order>> ordersByStatus = orderDao.getOrdersByStatus();
+                Map<String, List<Order>> ordersByStatus = orderDao.getTotalOrdersByStatus();
                 ordersByStatus.forEach((status, orders) -> {
                     System.out.printf("%s, %d%n", status, orders.size());;
                 });
@@ -63,11 +62,4 @@ public class App {
         CustomerDao customersDao = new CustomerDao(entityManager);
         customersDao.getCustomers().forEach(System.out::println);
     }
-
-    private static void employees(EntityManager entityManager) {
-        EmployeeDao employeeDao = new EmployeeDao(entityManager);
-        employeeDao.getEmployees().forEach(System.out::println);
-    }
-
-
 }

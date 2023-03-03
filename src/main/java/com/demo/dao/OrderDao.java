@@ -7,7 +7,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class OrderDao {
 
@@ -22,9 +21,13 @@ public class OrderDao {
                 .getResultList();
     }
 
-    public Map<String, List<Order>> getOrdersByStatus() {
+    public Map<String, List<Order>> getTotalOrdersByStatus() {
         return entityManager.createQuery("SELECT o FROM Order AS o", Order.class)
                 .getResultStream()
                 .collect(Collectors.groupingBy(Order::getStatus));
+    }
+
+    public List<Order> getOrdersByStatus(String status) {
+        return null;
     }
 }

@@ -4,6 +4,7 @@ import com.demo.model.Employee;
 
 import javax.persistence.EntityManager;
 import java.util.Collection;
+import java.util.Optional;
 
 public class EmployeeDao {
 
@@ -15,5 +16,14 @@ public class EmployeeDao {
     public Collection<Employee> getEmployees() {
         return entityManager.createQuery("SELECT e FROM Employee AS e", Employee.class)
                 .getResultList();
+    }
+
+    public Optional<Employee> findEmployee(Short id) {
+        return Optional.ofNullable(entityManager.find(Employee.class, id));
+    }
+    public void updateEmployee(Employee employee, String name) {
+        entityManager.getTransaction().begin();
+        employee.setFirstName(name);
+        entityManager.getTransaction().commit();
     }
 }

@@ -18,6 +18,10 @@ public class Employee {
     private Integer reportsTo;
     private String jobTitle;
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
