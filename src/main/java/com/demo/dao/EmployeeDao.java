@@ -31,4 +31,10 @@ public class EmployeeDao {
         employee.setFirstName(name);
         entityManager.getTransaction().commit();
     }
+
+    public String findEmployeeJobTitleByFirstName(String name) {
+        return entityManager.createQuery("SELECT e.jobTitle FROM Employee AS e WHERE e.firstName = :nameParam", String.class)
+                .setParameter("nameParam", name)
+                .getSingleResult();
+    }
 }

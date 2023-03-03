@@ -13,7 +13,7 @@ public class EmployeeService {
     private final Scanner scanner = new Scanner(System.in);
     public EmployeeService(EntityManager entityManager) {
         this.employeeDao = new EmployeeDao(entityManager);
-        System.out.println("1-All employees\n2-Update employee");
+        System.out.println("1-All employees\n2-Update employee\n3-Get employee job title by name");
         int option = scanner.nextInt();
         delegateTo(option);
     }
@@ -30,7 +30,17 @@ public class EmployeeService {
                 System.out.println(employee);
                 updateName(employee);
                 break;
+            case 3:
+                System.out.print("Type employee name: ");
+                String name = scanner.next();
+                getEmployeJobTitleByName(name);
+                break;
         }
+    }
+
+    private void getEmployeJobTitleByName(String name) {
+        name = employeeDao.findEmployeeJobTitleByFirstName(name);
+        System.out.println(name);
     }
 
     private void updateName(Employee employee) {
