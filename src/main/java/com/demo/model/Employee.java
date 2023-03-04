@@ -14,9 +14,13 @@ public class Employee {
     private String lastName;
     private String extension;
     private String email;
-    private String officeCode;
     private Integer reportsTo;
     private String jobTitle;
+
+    @ManyToOne
+    @JoinColumn(name = "officeCode")
+    private Office office;
+
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -30,7 +34,6 @@ public class Employee {
                 ", lastName='" + lastName + '\'' +
                 ", extension='" + extension + '\'' +
                 ", email='" + email + '\'' +
-                ", officeCode='" + officeCode + '\'' +
                 ", reportsTo=" + reportsTo +
                 ", jobTitle='" + jobTitle + '\'' +
                 '}';

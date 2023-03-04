@@ -21,7 +21,6 @@ public class Customer {
     private String postalCode;
     private String country;
     private String salesRepEmployeeNumber;
-
     @Column(precision = 10, scale = 2)
     private BigDecimal creditLimit;
 

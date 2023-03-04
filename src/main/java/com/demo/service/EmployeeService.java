@@ -4,6 +4,7 @@ import com.demo.dao.EmployeeDao;
 import com.demo.model.Employee;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -13,7 +14,7 @@ public class EmployeeService {
     private final Scanner scanner = new Scanner(System.in);
     public EmployeeService(EntityManager entityManager) {
         this.employeeDao = new EmployeeDao(entityManager);
-        System.out.println("1-All employees\n2-Update employee\n3-Get employee job title by name");
+        System.out.println("1-All employees\n2-Update employee\n3-Get employee job title by name\n4-Get employee by office");
         int option = scanner.nextInt();
         delegateTo(option);
     }
@@ -35,7 +36,16 @@ public class EmployeeService {
                 String name = scanner.next();
                 getEmployeJobTitleByName(name);
                 break;
+            case 4:
+                System.out.print("Type an office in a country: ");
+                name = scanner.next();
+                getEmployeesByOffice(name);
+                break;
         }
+    }
+
+    private void getEmployeesByOffice(String country) {
+        employeeDao.getEmployeesByOffice(country).forEach(System.out::println);
     }
 
     private void getEmployeJobTitleByName(String name) {
