@@ -14,7 +14,7 @@ public class OrderService {
     private final Scanner scanner = new Scanner(System.in);
     public OrderService(EntityManager entityManager) {
         this.orderDao = new OrderDao(entityManager);
-        System.out.println("1-All orders\n2-Order by status");
+        System.out.println("1-All orders\n2-Order by status\n3-Order by status with comments");
         int option = scanner.nextInt();
         delegateTo(option);
     }
@@ -30,7 +30,17 @@ public class OrderService {
                 String status = scanner.nextLine();
                 getOrderByStatus(status);
                 break;
+            case 3:
+                System.out.print("Type the status: ");
+                status = scanner.next();
+                getOrderByStatusWithComments(status);
+                break;
         }
+    }
+
+    private void getOrderByStatusWithComments(String status) {
+        orderDao.getTotalOrdersByStatusCommentsNonNull(status)
+                .forEach(System.out::println);
     }
 
     private void getOrderByStatus(String status) {
