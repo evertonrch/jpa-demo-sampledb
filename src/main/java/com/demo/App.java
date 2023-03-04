@@ -7,6 +7,7 @@ import com.demo.dao.OrderDao;
 import com.demo.model.Order;
 import com.demo.service.EmployeeService;
 import com.demo.service.OrderService;
+import com.demo.service.OfficeService;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -21,7 +22,7 @@ public class App {
         EntityManager entityManager = JPAConfig.getEntityManager();
 
         while (state) {
-            System.out.println("1-Employees\n2-Customers\n3-Orders");
+            System.out.println("0-Quit\n1-Employees\n2-Customers\n3-Orders\n4-Offices");
             int option = scanner.nextInt();
             switch (option) {
                 case 1:
@@ -33,8 +34,13 @@ public class App {
                 case 3:
                     new OrderService(entityManager);
                     break;
+                case 4:
+                    new OfficeService(entityManager);
+                    break;
+                case 0:
                 default:
                     state = false;
+                    System.out.println("Bye!");
                     break;
             }
         }
@@ -58,7 +64,6 @@ public class App {
         }
 
     }
-
     private static void customers(EntityManager entityManager) {
         CustomerDao customersDao = new CustomerDao(entityManager);
         customersDao.getCustomers().forEach(System.out::println);
