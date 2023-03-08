@@ -12,12 +12,11 @@ public class OfficeService {
 
     private OfficeDao officeDao;
     private final Scanner scanner = new Scanner(System.in);
-    private int option;
 
     public OfficeService(EntityManager entityManager) {
         officeDao = new OfficeDao(entityManager);
         System.out.println("1-All Offices\n2-Get office by id");
-        this.option = scanner.nextInt();
+        int option = scanner.nextInt();
         delegateTo(option);
     }
 
