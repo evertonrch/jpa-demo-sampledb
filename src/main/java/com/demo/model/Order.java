@@ -3,6 +3,7 @@ package com.demo.model;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -19,9 +20,8 @@ public class Order {
     private String status;
     private String comments;
     private Short customerNumber;
-
     @OneToMany(mappedBy = "order")
-    private List<OrderDetail> details = new ArrayList<>();
+    private List<OrderDetail> orderDetails = new ArrayList<>();
 
     public Short getId() {
         return id;
@@ -30,6 +30,31 @@ public class Order {
     public String getStatus() {
         return status;
     }
+
+    public LocalDate getOrderDate() {
+        return orderDate;
+    }
+
+    public LocalDate getRequiredDate() {
+        return requiredDate;
+    }
+
+    public LocalDate getShippedDate() {
+        return shippedDate;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public Short getCustomerNumber() {
+        return customerNumber;
+    }
+
+    public List<OrderDetail> getDetails() {
+        return Collections.unmodifiableList(orderDetails);
+    }
+
     @Override
     public String toString() {
         return "Order{" +
@@ -40,7 +65,6 @@ public class Order {
                 ", status='" + status + '\'' +
                 ", comments='" + comments + '\'' +
                 ", customerNumber=" + customerNumber +
-                ", details=" + details +
                 '}';
     }
 }

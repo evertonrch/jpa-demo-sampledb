@@ -40,4 +40,13 @@ public class OrderDao {
                 .getResultList();
 
     }
+
+    public List<Object[]> salesReport() {
+        String jpql = "SELECT prod.productName, o.orderDate, detail.quantity, o.status, prod.buyPrice"
+                    +" FROM Order o INNER JOIN o.orderDetails detail "
+                    +" INNER JOIN detail.product prod ";
+
+        return entityManager.createQuery(jpql, Object[].class)
+                .getResultList();
+    }
 }

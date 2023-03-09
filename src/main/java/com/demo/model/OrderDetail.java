@@ -22,14 +22,27 @@ public class OrderDetail {
     @JoinColumn(name = "productCode", insertable = false, updatable = false)
     private Product product;
 
-    @Override
-    public String toString() {
-        return "OrderDetail{" +
-                "id=" + id +
-                ", quantity=" + quantity +
-                ", priceEach=" + priceEach +
-                ", order=" + order.getId() +
-                ", product=" + product.getProductName() +
-                '}';
+    public OrderDetailId getId() {
+        return id;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public BigDecimal getPriceEach() {
+        return priceEach;
+    }
+
+    public Short getOrderLineNumber() {
+        return orderLineNumber;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public Product getProduct() {
+        return product;
     }
 }

@@ -5,10 +5,7 @@ import com.demo.config.JPAConfig;
 import com.demo.dao.CustomerDao;
 import com.demo.dao.OrderDao;
 import com.demo.model.Order;
-import com.demo.service.EmployeeService;
-import com.demo.service.OfficeService;
-import com.demo.service.OrderService;
-import com.demo.service.OrderDetailService;
+import com.demo.service.*;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -23,7 +20,7 @@ public class App {
         EntityManager entityManager = JPAConfig.getEntityManager();
 
         while (state) {
-            System.out.println("0-Quit\n1-Employees\n2-Customers\n3-Orders\n4-Offices\n5-OrderDetails");
+            System.out.println("0-Quit\n1-Employees\n2-Customers\n3-Orders\n4-Offices\n5-OrderDetails\n6-Products");
             int option = scanner.nextInt();
             switch (option) {
                 case 1:
@@ -40,6 +37,9 @@ public class App {
                     break;
                 case 5:
                     new OrderDetailService(entityManager);
+                case 6:
+                    new ProductService(entityManager);
+                    break;
                 case 0:
                 default:
                     state = false;

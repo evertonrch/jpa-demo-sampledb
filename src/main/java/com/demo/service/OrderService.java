@@ -4,17 +4,20 @@ import com.demo.dao.OrderDao;
 import com.demo.model.Order;
 
 import javax.persistence.EntityManager;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Scanner;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 public class OrderService {
 
     private OrderDao orderDao;
     private final Scanner scanner = new Scanner(System.in);
+
     public OrderService(EntityManager entityManager) {
         this.orderDao = new OrderDao(entityManager);
-        System.out.println("1-All orders\n2-Order by status\n3-Order by status with comments");
+        System.out.println("1-All orders\n2-Order by status\n3-Order by status with comments\n4-Report");
         int option = scanner.nextInt();
         delegateTo(option);
     }
@@ -35,6 +38,16 @@ public class OrderService {
                 status = scanner.next();
                 getOrderByStatusWithComments(status);
                 break;
+            case 4:
+                salesReport();
+                break;
+        }
+    }
+    private void salesReport() {
+        List<Object[]> objects = orderDao.salesReport();
+        for (Object[] object : objects) {
+            String out = Arrays.toString(object);
+            System.out.println(out);
         }
     }
 

@@ -22,8 +22,8 @@ public class Product {
     @Column(precision = 10, scale = 2, name = "MSRP")
     private BigDecimal msrp;
 
-//    @OneToMany(mappedBy = "product")
-//    private List<OrderDetail> details = new ArrayList<>();
+    @OneToMany(mappedBy = "product")
+    private List<OrderDetail> orderDetails = new ArrayList<>();
 
     public String getProductCode() {
         return productCode;
@@ -45,14 +45,4 @@ public class Product {
         return buyPrice;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "productCode='" + productCode + '\'' +
-                ", productName='" + productName + '\'' +
-                ", productDescription='" + productDescription + '\'' +
-                ", quantityInStock=" + quantityInStock +
-                ", buyPrice=" + buyPrice +
-                '}';
-    }
 }
