@@ -1,5 +1,6 @@
 package com.demo.dao;
 
+import com.demo.dto.SalesReportDto;
 import com.demo.model.Order;
 
 import javax.persistence.Entity;
@@ -41,12 +42,13 @@ public class OrderDao {
 
     }
 
-    public List<Object[]> salesReport() {
-        String jpql = "SELECT prod.productName, o.orderDate, detail.quantity, o.status, prod.buyPrice"
+    public List<SalesReportDto> salesReport() {
+        String jpql = "SELECT new com.demo.dto.SalesReportDto(prod.productName, o.orderDate, "
+                    +" detail.quantity, o.status, prod.buyPrice) "
                     +" FROM Order o INNER JOIN o.orderDetails detail "
                     +" INNER JOIN detail.product prod ";
 
-        return entityManager.createQuery(jpql, Object[].class)
+        return entityManager.createQuery(jpql, SalesReportDto.class)
                 .getResultList();
     }
 }

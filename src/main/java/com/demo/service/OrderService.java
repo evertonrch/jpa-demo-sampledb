@@ -1,6 +1,7 @@
 package com.demo.service;
 
 import com.demo.dao.OrderDao;
+import com.demo.dto.SalesReportDto;
 import com.demo.model.Order;
 
 import javax.persistence.EntityManager;
@@ -44,11 +45,8 @@ public class OrderService {
         }
     }
     private void salesReport() {
-        List<Object[]> objects = orderDao.salesReport();
-        for (Object[] object : objects) {
-            String out = Arrays.toString(object);
-            System.out.println(out);
-        }
+        List<SalesReportDto> salesReport = orderDao.salesReport();
+        salesReport.forEach(System.out::println);
     }
 
     private void getOrderByStatusWithComments(String status) {
