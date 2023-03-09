@@ -2,6 +2,7 @@ package com.demo.service;
 
 import com.demo.dao.OrderDao;
 import com.demo.dto.SalesReportDto;
+import com.demo.dto.ShippedProductsReportDto;
 import com.demo.model.Order;
 
 import javax.persistence.EntityManager;
@@ -18,7 +19,7 @@ public class OrderService {
 
     public OrderService(EntityManager entityManager) {
         this.orderDao = new OrderDao(entityManager);
-        System.out.println("1-All orders\n2-Order by status\n3-Order by status with comments\n4-Report");
+        System.out.println("1-All orders\n2-Order by status\n3-Order by status with comments\n4-Report\n5-Shipped products report");
         int option = scanner.nextInt();
         delegateTo(option);
     }
@@ -42,8 +43,19 @@ public class OrderService {
             case 4:
                 salesReport();
                 break;
+            case 5:
+                shippedProductsReport();
+                break;
         }
     }
+
+    private void shippedProductsReport() {
+        List<ShippedProductsReportDto> shippedProducts = orderDao.shippedProductsReport();
+        shippedProducts.stream()
+                .sorted(Comparator.comparing(ShippedProductsReportDto::getTotalPrice))
+                .forEach(System.out::println);
+    }
+
     private void salesReport() {
         List<SalesReportDto> salesReport = orderDao.salesReport();
         salesReport.forEach(System.out::println);
